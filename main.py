@@ -1,7 +1,7 @@
 def login(users, passwords):
     """[Implementación simple de inicio de sesión devuelve siempre un string que 
-    contine el nombe del usuario loguedo correctamente; en otro caso el string 
-    estará vacio. Imprime en pantalla informacián relacionada con el proceso 
+    contine el nombre del usuario logueado correctamente; en otro caso el string 
+    estará vacío. Imprime en pantalla información relacionada con el proceso 
     de loggin.]
 
     Args:
@@ -9,7 +9,7 @@ def login(users, passwords):
         passwords ([list]): [Lista con las contraseñas de usuario]
 
     Returns:
-        [str]: [string con el nombre del usuario correctamnete logueado]
+        [str]: [string con el nombre del usuario correctamente logueado]
     """
     user = input("Usuario: ")
     pas = input("Contraseña: ")
@@ -39,19 +39,19 @@ def get_column(obj, index=0):
 
 #%%
 def summarize_sort(sales, index=1, reverse=False, extend=True):
-    """[Reduce la informacion en la list pasada como primer argumente, agrupando los datos e sus id unicos]
+    """[Reduce la información en la list pasada como primer argumente, agrupando los datos e sus id unicos]
 
     Args:
-        sales ([list]): [lista de entrada con la informacion a extraer]
-        index (int, optional): [Indice de la posicion de referencia para el ordenmiento]. Defaults to 1.
+        sales ([list]): [lista de entrada con la información a extraer]
+        index (int, optional): [Indice de la posición de referencia para el ordenmiento]. Defaults to 1.
         reverse (bool, optional): [False de menor a mayor. True de mayor a menor]. Defaults to False.
         extend (bool, optional): [Flag especifico para diferenciar ente la lista de ventas y la de busquedas]. Defaults to True.
 
     Returns:
         [lista]: [Dependiendo del valor de extend = True: 
-                una lista con los elementos unicos y la informacion id, ventas, reseña(avg), devoluciones
+                una lista con los elementos unicos y la información id, ventas, reseña(avg), devoluciones
                 extend = False:
-                una lista con los elementos unicos y la informacion de id, conteo de busquedas.]
+                una lista con los elementos unicos y la información de id, conteo de busquedas.]
     """
     column = get_column(sales, 1)
     unique_items = list(set(column))
@@ -68,8 +68,8 @@ def profits(products, sales, index, time_unit):
     """[Calcula las ganancias en determinada unidad de tiempo, años, meses o dias.]
 
     Args:
-        products ([list]): [lista de entrada con la informacion de id y precio de cada producto]
-        sales ([list]): [lista de entrada con la informacion de ventas a extraer]
+        products ([list]): [lista de entrada con la información de id y precio de cada producto]
+        sales ([list]): [lista de entrada con la información de ventas a extraer]
         index ([int]): [0 para dias, 1 para meses, 2 para años]
         time_unit ([lista]): [lista con las unidades de tiempo a utilizar para el calculo, 
         está determinado por el valor de index: EX: si index = 0 time_unit sera una lista con los enteros de 1 a 30
@@ -106,7 +106,7 @@ def zero_match(items, products):
 
     Args:
         items ([list]): [Lista de elementos a excluir]
-        products ([list]): [lista con el total de elemntos]
+        products ([list]): [lista con el total de elementos]
 
     Returns:
         [lista]: [devuelve una lista que contiene los elementos de products que no se encuentran en items]
@@ -116,9 +116,9 @@ def zero_match(items, products):
 if __name__ == "__main__":
     from lifestore_file import lifestore_products, lifestore_sales, lifestore_searches
 
-    # Definicion de usuarios y contraseñas, los elementos de las listas users y passw 
-    # estan relacionados 1 a 1, es decir la contraseña para el usuario que esta en la 
-    # posicion dos de la lista users sera unicamente la posision dos de la lista passw
+    # Definición de usuarios y contraseñas, los elementos de las listas users y passw 
+    # están relacionados 1 a 1, es decir la contraseña para el usuario que esta en la 
+    # posición dos de la lista users sera unicamente la position dos de la lista passw
     usrs = ("admin", "usuario1")
     passw = ("asd", "123")
 
@@ -151,13 +151,13 @@ if __name__ == "__main__":
         5  -> Productos con las mejores reseñas.
         6  -> Productos con las peores reseñas.
         
-        ----> Resumenes:
+        ----> Resúmenes:
         7  -> Total de ingresos.
         8  -> Total anual.
         9  -> Ventas promedio mensuales.
         10 -> Meses con más ventas al año.
 
-        11 -> Atras.
+        11 -> Atrás.
 
 
         Opción:
@@ -169,9 +169,12 @@ if __name__ == "__main__":
         """
         choice1 = input(welcome_msg)
         if choice1 == '1':
-            user_loged = login(usrs, passw)
-            if user_loged:
-                while True:
+            user_logged = login(usrs, passw)
+            if user_logged:
+                while True: 
+                    """
+                    [Ciclo principal del menú de análisis.]
+                    """
                     choice2 = input(analysis_msg)
                     if choice2 == "1": # Productos con mayores ventas.
                         result = summarize_sort(lifestore_sales, reverse=True)
@@ -238,7 +241,7 @@ if __name__ == "__main__":
                                         time_unit=[str(month).zfill(2) for month in range(1, 13)])
                         print_list(sorted(total, key=lambda x:x[1], reverse=True), head='Mes\tIngresos(MXN)', fmt='{}\t{}')
                         input("\nPresione la tecla 'Enter' para regresar.")
-                    elif choice2 == "11": # Atras.
+                    elif choice2 == "11": # Atrás.
                         break
                     else:
                         continue
